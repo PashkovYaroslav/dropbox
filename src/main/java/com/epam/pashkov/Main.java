@@ -10,13 +10,12 @@ import java.net.URL;
 public class Main {
     public static void main(String[] args) {
         try {
-            File file = new File(args[1]);
+            File file = new File(args[1] + FileNameHelper.getFileName(args[0]));
             URL connection = new URL(args[0]);
-            HttpURLConnection urlconn;
-            urlconn = (HttpURLConnection) connection.openConnection();
-            urlconn.setRequestMethod("GET");
-            urlconn.connect();
-            InputStream in = urlconn.getInputStream();
+            HttpURLConnection urlConn = (HttpURLConnection) connection.openConnection();
+            urlConn.setRequestMethod("GET");
+            urlConn.connect();
+            InputStream in = urlConn.getInputStream();
             OutputStream writer = new FileOutputStream(file);
             byte buffer[] = new byte[512];
             int c = in.read(buffer);
